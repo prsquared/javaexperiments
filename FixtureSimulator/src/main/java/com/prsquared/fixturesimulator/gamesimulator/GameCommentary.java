@@ -1,3 +1,4 @@
+package com.prsquared.fixturesimulator.gamesimulator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,13 +8,13 @@ public class GameCommentary {
 	public static int awayTeam = 0;
 	public static int time = 0;
 	
-	public final static long TINY_INTERVAL=200;
-	public final static long SMALL_INTERVAL=1000;
-	public final static long LARGE_INTERVAL=2000;
+	public final static long TINY_INTERVAL=0;
+	public final static long SMALL_INTERVAL=0;
+	public final static long LARGE_INTERVAL=0;
 
-	public static void main(String[] args) {
-		int totalTime = 90 + (int)getRandomDecimal()*5;
-		int halfTime = 45 + (int)getRandomDecimal()*5;
+	public static void playGame() {
+		int totalTime = 90 + (int)(getRandomDecimal()*5);
+		int halfTime = 45 + (int)(getRandomDecimal()*5);
 		boolean homePossession = true; //Flag that dictates which team is in possession
 		boolean inProgress = true;
 		boolean secondHalf = false;
@@ -28,14 +29,14 @@ public class GameCommentary {
 				} else {
 					usePossession(homePossession);
 				}
-				if (!secondHalf && time == halfTime){//Stop match at Half Time
+				if (!secondHalf && time >= halfTime){//Stop match at Half Time
 					System.out.println("\nThe Referee has blown the Half-time whistle.");
-					System.out.println("HT : Score: Home " + homeTeam + " - " + awayTeam + " Away");
+					System.out.println("HT : Score: Home " + homeTeam + " - " + awayTeam + " Away\n");
 					time=45; //Reset Half-Time;
 					secondHalf = true;
 					Thread.sleep(LARGE_INTERVAL);
 				}
-				if (time == totalTime){ //End match
+				if (time >= totalTime){ //End match
 					System.out.println("\nThe Referee has blown the final whistle.");
 					System.out.println("FT : Final Score: Home " + homeTeam + " - " + awayTeam + " Away");
 					inProgress = false;
@@ -131,13 +132,13 @@ public class GameCommentary {
 	
 	public static void getRandomScoringAction(String inPossessionTeam) {
 		List<String> scoringActionList =  new ArrayList<>();
-		scoringActionList.add(time + "': " + inPossessionTeam + " team has scored!: ");
-		scoringActionList.add(time +"': "+ inPossessionTeam + " team taps the ball in!: ");
-		scoringActionList.add(time +"': What a great goal!!!: ");
-		scoringActionList.add(time +"': Stunning strike!!!: ");
-		scoringActionList.add(time +"': And they've scored!!!: ");
-		scoringActionList.add(time +"': Oh no, they've put it into their own goal!!!: ");
-		scoringActionList.add(time +"': "+ inPossessionTeam + " puts it away!: ");
+		scoringActionList.add(time + "': " + inPossessionTeam + " team has scored! ");
+		scoringActionList.add(time +"': "+ inPossessionTeam + " team taps the ball in! ");
+		scoringActionList.add(time +"': What a great goal!!! ");
+		scoringActionList.add(time +"': Stunning strike!!! ");
+		scoringActionList.add(time +"': And they've scored!!! ");
+		scoringActionList.add(time +"': Oh no, they've put it into their own goal!!! ");
+		scoringActionList.add(time +"': "+ inPossessionTeam + " team puts it away! ");
 		
 		System.out.println("\n" + scoringActionList.get((int)(Math.random()*scoringActionList.size())));
 		
